@@ -32,6 +32,53 @@ I checked the length of the ciphertext and saw it was 56 characters long, so I c
 
 The flag format for the ctf usually begins with actf{ so knowing this we can try to solve for the start of the ciphertext.
 
-I converted
+I converted fb into its byte format which was:
+```
+11111010
+```
+Then I checked for the ascii binary value of the letter a which was:
+```
+01100001
+```
+Knowing that the binary value of a was the desired output I had to find a byte value to xor with fb that would equal a, and that value was:
+```
+10011010
+```
+We now check the second byte of f9 to see if when xor'ed with the key will equal to the ascii value of c, since c is the next value in the flag format actf{.
+
+```
+11111001
+10011010
+________
+01100011
+```
+
+Converting 01100011 into ascii we see that it is indeed equal to c.
+
+At this point I can make a simple python script to finish the rest of the flag.
+```
+#ciphertext
+value = "fbf9eefce1f2f5eaffc5e3f5efc5efe9fffec5fbc5e9f9e8f3eaeee7"
+
+#changes the ciphertext from hex to binary
+b = bin(int(value, 16))
+b = b[2:]
+
+#splits the binary list value into byte-sized sections
+x = [b[i:i+8] for i in range(0, len(b), 8)]
+
+#For loop to iterate through the list of seperated values.
+for n in x:
+	
+   #Turns the byte into a decimal value
+   l = int(n,2)
+	
+   #XOR's the decimal value with our key 10011010, which in decimal is 154
+   l = l ^ 154
+   
+   #Prints the flag
+	  print(chr(l), end='')
+ ```
+
 
 
