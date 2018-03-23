@@ -91,11 +91,14 @@ int main(int argc, char ** argv) {
 ```
 
 The function encode is intersting, specifically this part:
->char v1 = *(char *)(i + (int32_t)str); // 0x80484fb
->*(char *)(i + a2) = (v1 ^ 9) - 3;
-
+```
+char v1 = *(char *)(i + (int32_t)str); // 0x80484fb
+*(char *)(i + a2) = (v1 ^ 9) - 3;
+```
 They also give us a string which compares the encrpted text to it:
->egzloxi|ixw]dkSe]dzSzccShejSi^3q
+```
+egzloxi|ixw]dkSe]dzSzccShejSi^3q
+```
 
 A simple script I wrote reverses the string back into the flag:
 ```
