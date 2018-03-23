@@ -77,8 +77,8 @@ for n in x:
    l = l ^ 154
    
    #Prints the flag
-	  print(chr(l), end='')
+   print(chr(l), end='')
  ```
-
+We then get the flag of: actf{hope_you_used_a_script}
 
 
